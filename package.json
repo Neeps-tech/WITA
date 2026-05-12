@@ -1,0 +1,24 @@
+{
+  "name": "wita-website",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.9 <25"
+  },
+  "scripts": {
+    "predev": "node ./scripts/check-runtime.cjs",
+    "prebuild": "node ./scripts/check-runtime.cjs",
+    "dev": "node ./node_modules/next/dist/bin/next dev",
+    "dev:clean": "rm -rf .next && node ./node_modules/next/dist/bin/next dev",
+    "build": "node ./node_modules/next/dist/bin/next build",
+    "start": "node ./node_modules/next/dist/bin/next start",
+    "lint": "node ./node_modules/next/dist/bin/next lint"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.460.0",
+    "next": "14.2.10",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
