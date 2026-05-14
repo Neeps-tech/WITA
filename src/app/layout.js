@@ -14,7 +14,10 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata = {
   title: "WITA | Women In Tourism Africa",
   description:
-    "Women In Tourism Africa empowers women leaders and entrepreneurs across the tourism value chain."
+    "Women In Tourism Africa empowers women leaders and entrepreneurs across the tourism value chain.",
+  icons: {
+    icon: "/images/wita-logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {
