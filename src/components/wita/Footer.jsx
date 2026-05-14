@@ -33,8 +33,12 @@ export default function Footer() {
         <div>
           <h4>Follow Us</h4>
           <ul>
-            {footerLinks.followUs.map((channel) => (
-              <li key={channel}>{channel}</li>
+            {footerLinks.followUs.map((item) => (
+              <li key={item.label}>
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                  {item.label}
+                </a>
+              </li>
             ))}
           </ul>
         </div>

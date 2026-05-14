@@ -134,7 +134,12 @@ export const footerLinks = {
     { label: "What We Do", href: "/what-we-do" },
     { label: "News", href: "/news" }
   ],
-  followUs: ["LinkedIn", "Instagram", "Facebook", "X"]
+  followUs: [
+    { label: "Facebook", href: "https://www.facebook.com/share/1ECGxkN4KM/?mibextid=wwXIfr" },
+    { label: "Instagram", href: "https://www.instagram.com/womenintourismafrica?igsh=MW1laXdvaGttejVyYQ==" },
+    { label: "LinkedIn", href: "#" },
+    { label: "X", href: "#" }
+  ]
 };
 
 export const contactInfo = {
