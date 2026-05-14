@@ -1,0 +1,22 @@
+[
+  {
+    "id": "wita-sustainable-tourism-tool-launch",
+    "day": "11",
+    "month": "Apr",
+    "title": "WITA Sustainable Travel & Tourism Sustainability Tool Launch",
+    "schedule": "2026-04-11 @ 09:00 AM - 2026-04-11 @ 03:30 PM",
+    "venue": "Hilton Hotel",
+    "createdAt": "2026-01-10T09:00:00.000Z",
+    "updatedAt": "2026-01-10T09:00:00.000Z"
+  },
+  {
+    "id": "wita-networking-breakfast",
+    "day": "31",
+    "month": "Mar",
+    "title": "Women In Tourism Africa (WITA) Networking Breakfast",
+    "schedule": "2026-03-31 @ 10:00 AM - 2026-03-31 @ 06:30 PM",
+    "venue": "Olesereni Hotel",
+    "createdAt": "2026-01-10T10:00:00.000Z",
+    "updatedAt": "2026-01-10T10:00:00.000Z"
+  }
+]

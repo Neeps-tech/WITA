@@ -1,8 +1,12 @@
 import ProgramAreas from "@/components/wita/ProgramAreas";
 import { Card } from "@/components/ui/card";
-import { events, services } from "@/lib/content";
+import { events as fallbackEvents, services } from "@/lib/content";
+import { listEvents } from "@/lib/events-store";
 
-export default function WhatWeDo() {
+export default async function WhatWeDo() {
+  const dynamicEvents = await listEvents();
+  const events = dynamicEvents.length > 0 ? dynamicEvents : fallbackEvents;
+
   return (
     <section className="wita-page">
       <div className="container">

@@ -9,7 +9,7 @@ const [major, minor] = process.versions.node.split('.').map(Number);
 const tooOld = major < 20 || (major === 20 && minor < 9);
 const tooNew = major >= 25;
 
-if (tooOld || tooNew) {
+if (tooOld) {
   console.error('\n[WITA] Unsupported Node.js runtime for this project.');
   console.error(`[WITA] Current: v${process.versions.node}`);
   console.error('[WITA] Required: >=20.9 and <25 (recommended: Node 22 LTS).');
@@ -22,6 +22,12 @@ if (tooOld || tooNew) {
   console.error('  npm install');
   console.error('  npm run dev:clean\n');
   process.exit(1);
+}
+
+if (tooNew) {
+  console.warn('\n[WITA] Warning: this project is tested on Node >=20.9 and <25.');
+  console.warn(`[WITA] Current: v${process.versions.node}`);
+  console.warn('[WITA] Continuing anyway, but if you see unstable dev behavior use Node 22 LTS.\n');
 }
 
 const nextBin = path.join(process.cwd(), 'node_modules', 'next', 'dist', 'bin', 'next');

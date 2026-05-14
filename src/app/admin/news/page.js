@@ -1,12 +1,9 @@
-import SiteLayout from "@/components/wita/SiteLayout";
-import NewsAdminPortal from "@/components/wita/NewsAdminPortal";
+import { redirect } from "next/navigation";
+import { requireAdminPageSession } from "@/lib/admin-auth";
 
 export const dynamic = "force-dynamic";
 
-export default function NewsAdminPage() {
-  return (
-    <SiteLayout>
-      <NewsAdminPortal />
-    </SiteLayout>
-  );
+export default async function NewsAdminPage() {
+  await requireAdminPageSession();
+  redirect("/admin/dashboard");
 }

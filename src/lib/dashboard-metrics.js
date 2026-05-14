@@ -41,6 +41,7 @@ function buildMonthlyBuckets() {
       key: monthKey(point),
       label: monthLabel(monthKey(point)),
       news: 0,
+      events: 0,
       contacts: 0,
       subscribers: 0
     });
@@ -70,11 +71,18 @@ function isCurrentMonth(date) {
   );
 }
 
-export function buildDashboardMetrics({ newsItems, contactMessages, subscribers }) {
+export function buildDashboardMetrics({
+  newsItems,
+  eventsItems,
+  contactMessages,
+  subscribers,
+  galleryItems
+}) {
   const monthly = buildMonthlyBuckets();
   const monthlyMap = new Map(monthly.map((item) => [item.key, item]));
 
   let thisMonthNews = 0;
+  let thisMonthEvents = 0;
   let thisMonthContacts = 0;
   let thisMonthSubscribers = 0;
 
@@ -90,6 +98,21 @@ export function buildDashboardMetrics({ newsItems, contactMessages, subscribers 
     }
     if (isCurrentMonth(date)) {
       thisMonthNews += 1;
+    }
+  });
+
+  eventsItems.forEach((item) => {
+    const date = getRecordDate(item);
+    if (!date) {
+      return;
+    }
+    const key = monthKey(date);
+    const bucket = monthlyMap.get(key);
+    if (bucket) {
+      bucket.events += 1;
+    }
+    if (isCurrentMonth(date)) {
+      thisMonthEvents += 1;
     }
   });
 
@@ -124,10 +147,12 @@ export function buildDashboardMetrics({ newsItems, contactMessages, subscribers 
   });
 
   const totalNews = newsItems.length;
+  const totalEvents = eventsItems.length;
   const totalContacts = contactMessages.length;
   const totalSubscribers = subscribers.length;
+  const totalGalleryItems = galleryItems.length;
   const totalEngagement = totalContacts + totalSubscribers;
-  const thisMonthTotal = thisMonthNews + thisMonthContacts + thisMonthSubscribers;
+  const thisMonthTotal = thisMonthNews + thisMonthEvents + thisMonthContacts + thisMonthSubscribers;
 
   const kpis = [
     {
@@ -135,6 +160,12 @@ export function buildDashboardMetrics({ newsItems, contactMessages, subscribers 
       label: "News Published",
       value: totalNews,
       helper: `${thisMonthNews} published this month`
+    },
+    {
+      key: "events",
+      label: "Events Managed",
+      value: totalEvents,
+      helper: `${thisMonthEvents} created this month`
     },
     {
       key: "contacts",
@@ -153,15 +184,22 @@ export function buildDashboardMetrics({ newsItems, contactMessages, subscribers 
       label: "Total Engagement",
       value: totalEngagement,
       helper: `${thisMonthTotal} new interactions this month`
+    },
+    {
+      key: "gallery",
+      label: "Gallery Images",
+      value: totalGalleryItems,
+      helper: `${totalGalleryItems} uploaded images available`
     }
   ];
 
   const trend = monthly.map((item) => ({
     month: item.label,
     news: toSafeNumber(item.news),
+    events: toSafeNumber(item.events),
     contacts: toSafeNumber(item.contacts),
     subscribers: toSafeNumber(item.subscribers),
-    total: toSafeNumber(item.news + item.contacts + item.subscribers)
+    total: toSafeNumber(item.news + item.events + item.contacts + item.subscribers)
   }));
 
   return {
@@ -169,8 +207,10 @@ export function buildDashboardMetrics({ newsItems, contactMessages, subscribers 
     trend,
     newsByCategory: tallyByCategory(newsItems),
     latestNews: newsItems.slice(0, 5),
+    latestEvents: eventsItems.slice(0, 5),
     latestContacts: contactMessages.slice(0, 5),
     latestSubscribers: subscribers.slice(0, 5),
+    latestGalleryItems: galleryItems.slice(0, 8),
     generatedAt: new Date().toISOString()
   };
 }

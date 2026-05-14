@@ -3,11 +3,17 @@ import {
   createNewsletterSubscriber,
   listNewsletterSubscribers
 } from "@/lib/newsletter-store";
+import { requireAdminApiSession } from "@/lib/admin-auth";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
+    const unauthorized = await requireAdminApiSession();
+    if (unauthorized) {
+      return unauthorized;
+    }
+
     const items = await listNewsletterSubscribers();
     return NextResponse.json({ items });
   } catch (error) {

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createNews, listNews } from "@/lib/news-store";
+import { requireAdminApiSession } from "@/lib/admin-auth";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,11 @@ export async function GET() {
 
 export async function POST(request) {
   try {
+    const unauthorized = await requireAdminApiSession();
+    if (unauthorized) {
+      return unauthorized;
+    }
+
     const payload = await request.json();
     const created = await createNews(payload);
     return NextResponse.json({ item: created }, { status: 201 });
