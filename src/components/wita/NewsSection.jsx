@@ -25,7 +25,10 @@ export default async function NewsSection() {
               <p className="wita-news-tag">{item.category}</p>
               <h3>{item.title}</h3>
               <p>{item.summary}</p>
-              <Link href="/news" className="wita-news-link">
+              <Link
+                href={item.slug ? `/news/${item.slug}` : "/news"}
+                className="wita-news-link"
+              >
                 Read More
               </Link>
             </Card>

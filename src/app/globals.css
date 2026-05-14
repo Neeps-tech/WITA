@@ -820,6 +820,147 @@ main {
   gap: 1rem;
 }
 
+.wita-admin-top-actions {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.wita-kpi-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.wita-kpi-card {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.wita-kpi-label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(30, 26, 20, 0.58);
+}
+
+.wita-kpi-value {
+  font-family: var(--font-display), "Times New Roman", serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  color: var(--wita-ink);
+  line-height: 1;
+}
+
+.wita-kpi-helper {
+  font-size: 0.92rem;
+  color: rgba(30, 26, 20, 0.74);
+}
+
+.wita-admin-insights,
+.wita-admin-latest-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.wita-admin-muted {
+  color: rgba(30, 26, 20, 0.7);
+  margin-top: 0.3rem;
+}
+
+.wita-trend-list {
+  margin-top: 0.8rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.wita-trend-row {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr);
+  gap: 0.55rem;
+}
+
+.wita-trend-row p {
+  margin: 0;
+}
+
+.wita-trend-row .wita-trend-value {
+  grid-column: 1 / -1;
+  font-size: 0.84rem;
+  color: rgba(30, 26, 20, 0.68);
+}
+
+.wita-trend-bar-wrap {
+  min-height: 10px;
+  border-radius: 999px;
+  background: rgba(30, 26, 20, 0.12);
+  overflow: hidden;
+  align-self: center;
+}
+
+.wita-trend-bar {
+  display: block;
+  min-height: 10px;
+  border-radius: inherit;
+  background: linear-gradient(120deg, #d39642, #8f4e1d);
+}
+
+.wita-admin-metric-list {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.wita-admin-metric-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(30, 26, 20, 0.18);
+  padding-bottom: 0.35rem;
+}
+
+.wita-admin-metric-list strong {
+  font-family: var(--font-display), "Times New Roman", serif;
+  font-size: 1.2rem;
+}
+
+.wita-admin-feed {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.wita-admin-feed li {
+  border-bottom: 1px solid rgba(30, 26, 20, 0.12);
+  padding-bottom: 0.65rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.wita-admin-feed li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.wita-admin-feed small,
+.wita-admin-meta {
+  color: rgba(30, 26, 20, 0.65);
+}
+
+.wita-admin-meta {
+  margin-top: 0.75rem;
+  font-size: 0.88rem;
+}
+
 .wita-admin-card h2,
 .wita-admin-card h3 {
   font-size: 1.45rem;
@@ -967,7 +1108,10 @@ main {
   .wita-service-grid,
   .wita-events-grid,
   .wita-approach,
-  .wita-footer-grid {
+  .wita-footer-grid,
+  .wita-kpi-grid,
+  .wita-admin-insights,
+  .wita-admin-latest-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1024,7 +1168,10 @@ main {
   .wita-events-grid,
   .wita-approach,
   .wita-footer-grid,
-  .wita-newsletter-form {
+  .wita-newsletter-form,
+  .wita-kpi-grid,
+  .wita-admin-insights,
+  .wita-admin-latest-grid {
     grid-template-columns: 1fr;
   }
 

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { listNews } from "@/lib/news-store";
 
@@ -28,7 +29,9 @@ export default async function News() {
               <h2>{item.title}</h2>
               <p>{item.summary}</p>
               {item.excerpt ? <p>{item.excerpt}</p> : null}
-              <p className="wita-news-link">Read More</p>
+              <Link href={item.slug ? `/news/${item.slug}` : "/news"} className="wita-news-link">
+                Read More
+              </Link>
             </Card>
           ))}
 

@@ -1,4 +1,3 @@
-import "server-only";
 import { promises as fs } from "fs";
 import path from "path";
 import crypto from "crypto";
@@ -37,6 +36,25 @@ function makeSlug(value) {
   return `news-${Date.now()}`;
 }
 
+function ensureUniqueSlug(slug, items, excludeId) {
+  const base = makeSlug(slug);
+  let candidate = base;
+  let counter = 2;
+
+  while (
+    items.some(
+      (item) =>
+        normalizeText(item.slug) === candidate &&
+        (!excludeId || normalizeText(item.id) !== normalizeText(excludeId))
+    )
+  ) {
+    candidate = `${base}-${counter}`;
+    counter += 1;
+  }
+
+  return candidate;
+}
+
 async function readNewsRaw() {
   try {
     const raw = await fs.readFile(NEWS_FILE, "utf-8");
@@ -60,6 +78,15 @@ export async function listNews() {
   return readNewsRaw();
 }
 
+export async function getNewsBySlug(slug) {
+  const target = normalizeText(slug);
+  if (!target) {
+    return null;
+  }
+  const items = await readNewsRaw();
+  return items.find((item) => normalizeText(item.slug) === target) || null;
+}
+
 export async function createNews(payload) {
   const title = normalizeText(payload?.title);
   const summary = normalizeText(payload?.summary);
@@ -77,7 +104,7 @@ export async function createNews(payload) {
 
   const current = await readNewsRaw();
   const createdAt = new Date().toISOString();
-  const slug = makeSlug(payload?.slug || title);
+  const slug = ensureUniqueSlug(payload?.slug || title, current);
 
   const record = {
     id: crypto.randomUUID(),
@@ -120,7 +147,7 @@ export async function updateNews(id, payload) {
     excerpt: normalizeText(payload?.excerpt) || existing.excerpt || "",
     category: normalizeText(payload?.category) || existing.category || "General",
     date: formatDate(payload?.date || existing.date),
-    slug: makeSlug(payload?.slug || title || existing.slug),
+    slug: ensureUniqueSlug(payload?.slug || title || existing.slug, current, recordId),
     updatedAt: new Date().toISOString()
   };
 

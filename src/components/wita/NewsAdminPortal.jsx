@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -154,6 +155,17 @@ export default function NewsAdminPortal() {
             Add, edit, and remove news cards that appear on the home page and the
             full news page.
           </p>
+        </div>
+
+        <div className="wita-admin-top-actions">
+          <Link href="/admin/dashboard">
+            <Button type="button" variant="dark">
+              View KPI Dashboard
+            </Button>
+          </Link>
+          <Button type="button" onClick={loadItems}>
+            Refresh News
+          </Button>
         </div>
 
         <Card className="wita-admin-card">

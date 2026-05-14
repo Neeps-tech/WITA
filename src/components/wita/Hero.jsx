@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { heroContent } from "@/lib/content";
@@ -30,12 +31,16 @@ export default function Hero() {
             markets, and influence.
           </p>
           <div className="wita-hero-actions">
-            <Button className="wita-hero-primary">
-              Explore Our Work <ArrowRight size={18} />
-            </Button>
-            <Button variant="ghost" className="wita-hero-secondary">
-              Get In Touch
-            </Button>
+            <Link href="/what-we-do">
+              <Button className="wita-hero-primary">
+                Explore Our Work <ArrowRight size={18} />
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button variant="ghost" className="wita-hero-secondary">
+                Get In Touch
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

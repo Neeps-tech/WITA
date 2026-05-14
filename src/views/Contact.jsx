@@ -7,12 +7,48 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { contactInfo } from "@/lib/content";
 
-export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+const emptyForm = {
+  fullName: "",
+  email: "",
+  organization: "",
+  message: ""
+};
 
-  function handleSubmit(event) {
+export default function Contact() {
+  const [form, setForm] = useState(emptyForm);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  function onChange(field, value) {
+    setForm((current) => ({ ...current, [field]: value }));
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitted(false);
+    setError("");
+
+    try {
+      const response = await fetch("/api/contact-messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form)
+      });
+      const payload = await response.json();
+
+      if (!response.ok) {
+        throw new Error(payload.error || "Unable to submit message.");
+      }
+
+      setSubmitted(true);
+      setForm(emptyForm);
+    } catch (requestError) {
+      setError(requestError.message || "Unable to submit message.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -31,17 +67,40 @@ export default function Contact() {
           <Card className="reveal-up">
             <h2>Send Us A Message</h2>
             <form className="wita-contact-form" onSubmit={handleSubmit}>
-              <Input placeholder="Full name" required />
-              <Input placeholder="Email address" type="email" required />
-              <Input placeholder="Organization" />
-              <Textarea placeholder="Tell us how we can help" required />
-              <Button type="submit">Send Message</Button>
+              <Input
+                placeholder="Full name"
+                value={form.fullName}
+                onChange={(event) => onChange("fullName", event.target.value)}
+                required
+              />
+              <Input
+                placeholder="Email address"
+                type="email"
+                value={form.email}
+                onChange={(event) => onChange("email", event.target.value)}
+                required
+              />
+              <Input
+                placeholder="Organization"
+                value={form.organization}
+                onChange={(event) => onChange("organization", event.target.value)}
+              />
+              <Textarea
+                placeholder="Tell us how we can help"
+                value={form.message}
+                onChange={(event) => onChange("message", event.target.value)}
+                required
+              />
+              <Button type="submit" disabled={submitting}>
+                {submitting ? "Sending..." : "Send Message"}
+              </Button>
             </form>
             {submitted && (
               <p className="wita-newsletter-status">
                 Thank you. Your message has been received.
               </p>
             )}
+            {error ? <p className="wita-inline-error">{error}</p> : null}
           </Card>
 
           <Card className="reveal-up delay-2">

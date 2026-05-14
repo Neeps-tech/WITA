@@ -1,12 +1,12 @@
 import SiteLayout from "@/components/wita/SiteLayout";
-import NewsAdminPortal from "@/components/wita/NewsAdminPortal";
+import AdminDashboard from "@/components/wita/AdminDashboard";
 
 export const dynamic = "force-dynamic";
 
-export default function NewsAdminPage() {
+export default function AdminDashboardPage() {
   return (
     <SiteLayout>
-      <NewsAdminPortal />
+      <AdminDashboard />
     </SiteLayout>
   );
 }
