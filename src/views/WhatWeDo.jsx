@@ -1,12 +1,8 @@
 import ProgramAreas from "@/components/wita/ProgramAreas";
 import { Card } from "@/components/ui/card";
-import { events as fallbackEvents, services } from "@/lib/content";
-import { listEvents } from "@/lib/events-store";
+import { services } from "@/lib/content";
 
-export default async function WhatWeDo() {
-  const dynamicEvents = await listEvents();
-  const events = dynamicEvents.length > 0 ? dynamicEvents : fallbackEvents;
-
+export default function WhatWeDo() {
   return (
     <section className="wita-page">
       <div className="container">
@@ -38,33 +34,6 @@ export default async function WhatWeDo() {
             >
               <h3>{service.title}</h3>
               <p>{service.description}</p>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      <div className="container wita-events-wrap">
-        <div className="wita-section-heading reveal-up">
-          <p className="eyebrow">Events</p>
-          <h2>Upcoming WITA Engagements</h2>
-        </div>
-
-        <div className="wita-events-grid">
-          {events.map((event, index) => (
-            <Card
-              key={event.title}
-              className="wita-event-card reveal-up"
-              style={{ animationDelay: `${index * 120}ms` }}
-            >
-              <div className="wita-event-date">
-                <span>{event.day}</span>
-                <small>{event.month}</small>
-              </div>
-              <div>
-                <h3>{event.title}</h3>
-                <p>{event.schedule}</p>
-                <p>{event.venue}</p>
-              </div>
             </Card>
           ))}
         </div>

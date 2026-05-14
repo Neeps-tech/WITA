@@ -2,6 +2,7 @@ export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Who We Are", href: "/who-we-are" },
   { label: "What We Do", href: "/what-we-do" },
+  { label: "Events", href: "/events" },
   { label: "News", href: "/news" },
   { label: "Contact Us", href: "/contact" }
 ];
@@ -132,6 +133,7 @@ export const footerLinks = {
   organization: [
     { label: "Who We Are", href: "/who-we-are" },
     { label: "What We Do", href: "/what-we-do" },
+    { label: "Events", href: "/events" },
     { label: "News", href: "/news" }
   ],
   followUs: [
