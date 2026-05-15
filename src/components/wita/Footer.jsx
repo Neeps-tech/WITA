@@ -43,10 +43,15 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="wita-footer-contact">
           <h4>Contact Info</h4>
-          <p>{contactInfo.address}</p>
-          <p>{contactInfo.phone}</p>
+          {contactInfo.locations.map((loc) => (
+            <div key={loc.country} style={{ marginBottom: '1rem' }}>
+              <p style={{ fontWeight: '600', color: 'var(--wita-accent)' }}>{loc.country}</p>
+              <p>{loc.address}</p>
+              <p>{loc.phone}</p>
+            </div>
+          ))}
           <p>{contactInfo.email}</p>
         </div>
       </div>

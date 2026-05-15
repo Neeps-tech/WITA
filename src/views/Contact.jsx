@@ -105,8 +105,15 @@ export default function Contact() {
 
           <Card className="reveal-up delay-2">
             <h2>Contact Info</h2>
-            <p>{contactInfo.address}</p>
-            <p>{contactInfo.phone}</p>
+            {contactInfo.locations.map((loc) => (
+              <div key={loc.country} style={{ marginBottom: "1.5rem" }}>
+                <h3 style={{ fontSize: "1rem", color: "var(--wita-accent)", marginBottom: "0.25rem" }}>
+                  {loc.country}
+                </h3>
+                <p>{loc.address}</p>
+                <p>{loc.phone}</p>
+              </div>
+            ))}
             <p>{contactInfo.email}</p>
           </Card>
         </div>

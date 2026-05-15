@@ -145,7 +145,17 @@ export const footerLinks = {
 };
 
 export const contactInfo = {
-  address: "Chelezo House, Along Kindaruma Road, Nairobi - Kenya",
-  phone: "+254 204 404 243",
-  email: "info@womenintourismafrica.com"
+  email: "info@womenintourismafrica.com",
+  locations: [
+    {
+      country: "South Africa",
+      address: "5 Eglin Rd, Sunninghill, Sandton - South Africa",
+      phone: "+27 61 360 7730"
+    },
+    {
+      country: "Kenya",
+      address: "Chelezo House, Along Kindaruma Road, Nairobi - Kenya",
+      phone: "+254 204 404 243"
+    }
+  ]
 };
